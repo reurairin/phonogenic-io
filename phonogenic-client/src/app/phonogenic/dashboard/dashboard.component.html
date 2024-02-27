@@ -1,3 +1,21 @@
 <main class="container">
-  <p>dashboard works!</p>
+  <section>
+    <span class="p-float-label">
+      <input pInputText id="phonemes" [(ngModel)]="phonemes" />
+      <label for="phonemes">Phonemes</label>
+    </span>
+    <p-button
+      label="Start"
+      size="small"
+      (onClick)="onGenerationStart()"
+    ></p-button>
+  </section>
+  <section>
+    <p>Output:</p>
+    <p-chip
+      *ngFor="let specimen of generationResult"
+      [label]="specimen"
+      class="result-chip"
+    ></p-chip>
+  </section>
 </main>

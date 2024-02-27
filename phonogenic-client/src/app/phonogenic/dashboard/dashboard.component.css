@@ -2,6 +2,11 @@
   height: 100%;
 
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.result-chip {
+  margin-left: 0.5rem;
 }
