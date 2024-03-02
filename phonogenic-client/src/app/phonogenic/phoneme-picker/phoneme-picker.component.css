@@ -9,3 +9,7 @@
 .phoneme-button:hover {
   cursor: pointer;
 }
+
+.header {
+    font-size: 1.1rem;
+}
