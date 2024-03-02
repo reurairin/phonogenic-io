@@ -5,13 +5,14 @@ import { FormsModule } from '@angular/forms';
 import { TransformationService } from '../services/transformation.service';
 import { CommonModule } from '@angular/common';
 import { ChipModule } from 'primeng/chip';
+import { PhonemePickerComponent } from '../phoneme-picker/phoneme-picker.component';
 
 const primengComponents = [ButtonModule, InputTextModule, ChipModule];
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [...primengComponents, FormsModule, CommonModule],
+  imports: [...primengComponents, FormsModule, CommonModule, PhonemePickerComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
