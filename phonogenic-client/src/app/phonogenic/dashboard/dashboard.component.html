@@ -1,9 +1,15 @@
 <main class="container">
   <section>
-    <app-phoneme-picker />
-    <span class="p-float-label">
-      <input pInputText id="phonemes" [(ngModel)]="phonemes" />
-    </span>
+    <app-phoneme-table />
+    <app-phoneme-free-input />
+    <p-button
+      icon="pi pi-language"
+      [outlined]="true"
+      size="small"
+      severity="secondary"
+      aria-label="openPhonemeTable"
+      (onClick)="openPhonemeTable()"
+    ></p-button>
     <p-button
       label="Start"
       size="small"

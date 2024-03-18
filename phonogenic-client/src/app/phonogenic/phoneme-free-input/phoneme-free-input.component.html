@@ -1,0 +1,13 @@
+<span class="phoneme-input-container">
+  <span class="p-float-label">
+    <input pInputText id="phonemes" [(ngModel)]="phonemes" />
+  </span>
+  <p-button
+    icon="pi pi-trash"
+    [outlined]="true"
+    size="small"
+    severity="secondary"
+    aria-label="clearInput"
+    (onClick)="clearInput()"
+  ></p-button>
+</span>

@@ -1,23 +1,24 @@
 import { Component } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
-import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { TransformationService } from '../services/transformation.service';
 import { CommonModule } from '@angular/common';
 import { ChipModule } from 'primeng/chip';
-import { PhonemePickerComponent } from '../phoneme-picker/phoneme-picker.component';
+import { PhonemeTableComponent } from '../phoneme-table/phoneme-table.component';
 import { UserInputService } from '../services/user-input.service';
+import { PhonemeFreeInputComponent } from '../phoneme-free-input/phoneme-free-input.component';
 
-const primengComponents = [ButtonModule, InputTextModule, ChipModule];
+const primengComponents = [ButtonModule, ChipModule];
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
     ...primengComponents,
+    PhonemeFreeInputComponent,
     FormsModule,
     CommonModule,
-    PhonemePickerComponent,
+    PhonemeTableComponent,
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
@@ -36,4 +37,7 @@ export class DashboardComponent {
 
   public phonemes = this.userInputService.getCurrentPhonemes();
   public generationResult: string[] = [];
+  public openPhonemeTable() {
+    this.userInputService.openPhonemeTable();
+  }
 }
