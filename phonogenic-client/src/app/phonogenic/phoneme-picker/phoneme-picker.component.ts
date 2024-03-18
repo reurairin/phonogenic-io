@@ -1,17 +1,11 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { ButtonModule } from 'primeng/button';
+import { Component } from '@angular/core';
+import { PhonemeButtonComponent } from '../phoneme-button/phoneme-button.component';
 
 @Component({
   selector: 'app-phoneme-picker',
   standalone: true,
-  imports: [ButtonModule],
+  imports: [PhonemeButtonComponent],
   templateUrl: './phoneme-picker.component.html',
   styleUrl: './phoneme-picker.component.css',
 })
-export class PhonemePickerComponent {
-  @Output() phonemeSelectedEvent = new EventEmitter<string>();
-
-  onPhonemeSelected(phoneme: string) {
-    this.phonemeSelectedEvent.emit(phoneme);
-  }
-}
+export class PhonemePickerComponent {}
