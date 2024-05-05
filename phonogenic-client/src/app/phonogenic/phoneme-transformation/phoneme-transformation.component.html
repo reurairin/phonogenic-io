@@ -1,0 +1,119 @@
+<div class="phoneme-transformation-container" [formGroup]="form">
+  <span class="p-float-label --inline-block">
+    <input pInputText id="initialPhoneme" formControlName="initialPhoneme" />
+    <label for="initialPhoneme">Initial Phoneme</label>
+  </span>
+  =>
+  <ng-container formGroupName="conditions">
+    <span class="p-float-label --inline-block">
+      <p-dropdown
+        formControlName="position"
+        [options]="positionOptions"
+        optionLabel="label"
+        optionValue="value"
+        [showClear]="true"
+        placeholder="Position"
+        tooltip="Position of phoneme in the word"
+        tooltipPosition="bottom"
+      ></p-dropdown>
+      <label for="username">Position</label>
+    </span>
+    +
+    <span class="p-float-label --inline-block">
+      <p-dropdown
+        formControlName="stressing"
+        [options]="stressingOptions"
+        optionLabel="label"
+        optionValue="value"
+        [showClear]="true"
+        placeholder="Is stressed?"
+        tooltip="Is phoneme stressed?"
+        tooltipPosition="bottom"
+      ></p-dropdown>
+      <label for="stressing">Stressing</label>
+    </span>
+    +
+    <span class="p-float-label --inline-block">
+      <p-dropdown
+        formControlName="leftNeighborType"
+        [options]="neighborTypeOptions"
+        optionLabel="label"
+        optionValue="value"
+        [showClear]="true"
+        placeholder="Left Neighbor"
+        tooltip="Phoneme immediately preceding initial phoneme in a word"
+        tooltipPosition="bottom"
+      ></p-dropdown>
+      <label for="leftNeighborType">Left Neighbor</label>
+    </span>
+    <span
+      class="p-float-label --inline-block"
+      *ngIf="isLeftNeighborVisible$ | async"
+    >
+      <p-chips formControlName="leftNeighborList" separator="," />
+      <label for="leftNeighborList">Left Neighbor List</label>
+    </span>
+    +
+
+    <span class="p-float-label --inline-block">
+      <p-dropdown
+        formControlName="rightNeighborType"
+        [options]="neighborTypeOptions"
+        optionLabel="label"
+        optionValue="value"
+        [showClear]="true"
+        placeholder="Right Neighbor"
+        tooltip="Phoneme immediately following initial phoneme in a word"
+        tooltipPosition="bottom"
+      ></p-dropdown>
+      <label for="rightNeighborType">Right Neighbor</label>
+    </span>
+    <span
+      class="p-float-label --inline-block"
+      *ngIf="isRightNeighborVisible$ | async"
+    >
+      <p-chips formControlName="rightNeighborList" separator="," />
+      <label for="rightNeighborList">Right Neighbor List</label>
+    </span>
+    +
+    <span class="p-float-label --inline-block">
+      <p-dropdown
+        placeholder="Prev. Syllable"
+        [options]="syllableOptions"
+        optionLabel="label"
+        immediately="Previous syllable in the word"
+        tooltipPosition="bottom"
+      ></p-dropdown>
+      <label for="username">Prev. Syllable</label>
+    </span>
+    +
+    <span class="p-float-label --inline-block">
+      <p-dropdown
+        placeholder="Next Syllable"
+        [options]="syllableOptions"
+        optionLabel="label"
+        immediately="Following syllable in the word"
+        tooltipPosition="bottom"
+      ></p-dropdown>
+      <label for="username">Next Syllable</label>
+    </span>
+  </ng-container>
+  +
+  <span class="p-float-label --inline-block">
+    <input
+      pInputText
+      id="transformationLikelihood"
+      formControlName="transformationLikelihood"
+    />
+    <label for="transformationLikelihood">Transformation Likelihood</label>
+  </span>
+  =>
+  <span class="p-float-label --inline-block">
+    <input
+      pInputText
+      id="resultingPhoneme"
+      formControlName="resultingPhoneme"
+    />
+    <label for="resultingPhoneme">Resulting Phoneme</label>
+  </span>
+</div>

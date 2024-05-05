@@ -1,0 +1,9 @@
+<h4>Transformation Pipeline</h4>
+<div *ngFor="let transformation of transformationFunctions; index as index">
+  {{ transformation.name }}
+</div>
+<p-button
+  icon="pi pi-plus"
+  pTooltip="Add new transformation function"
+  (click)="addTransformationFunction()"
+></p-button>

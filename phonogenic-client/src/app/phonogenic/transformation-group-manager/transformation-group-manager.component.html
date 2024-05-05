@@ -1,0 +1,93 @@
+<p-button
+  label="Manage Transformation Groups"
+  size="small"
+  (onClick)="toggleSidebar()"
+></p-button>
+
+<p-sidebar [(visible)]="isOpen" position="bottom" [style]="{ height: ' 95%' }">
+  <ng-template pTemplate="header">
+    <h2>Transformation Group Manager</h2>
+    <p-button
+      icon="pi pi-save"
+      [outlined]="true"
+      size="small"
+      aria-label="openPhonemeTable"
+      (onClick)="saveConfig()"
+    ></p-button>
+    <p-button
+      icon="pi pi-upload"
+      [outlined]="true"
+      size="small"
+      aria-label="openPhonemeTable"
+      (onClick)="loadConfig()"
+    ></p-button>
+  </ng-template>
+  <ul>
+    <li><s>add function</s></li>
+    <li><s>remove function</s></li>
+    <li>edit function</li>
+    <li>save all functions</li>
+    <li>load functions</li>
+    <li>load initial state from JSON</li>
+  </ul>
+  <p-accordion [multiple]="true" [formGroup]="form">
+    <ng-container formArrayName="transformationGroups">
+      <p-accordionTab
+        *ngFor="
+          let transformationGroup of transformationGroups.controls;
+          let indexGroup = index
+        "
+        [formGroupName]="indexGroup"
+        class="transformation-group-container"
+      >
+        <ng-template pTemplate="header">
+          <span class="p-float-label --inline-block">
+            <input
+              pInputText
+              id="name"
+              formControlName="name"
+              (keydown)="stopPropagation($event)"
+              (click)="stopPropagation($event)"
+            />
+            <label for="name">Group Name</label>
+          </span>
+          <p-button
+            icon="pi pi-trash"
+            pTooltip="Delete"
+            (click)="removeTransformationGroup(indexGroup)"
+          />
+        </ng-template>
+        <div
+          class="phoneme-transformation-wrapper"
+          *ngFor="
+            let transformation of getTransformationArray(indexGroup).controls;
+            let indexTransformation = index
+          "
+          formArrayName="transformations"
+        >
+          <app-phoneme-transformation [formControlName]="indexTransformation" />
+          <p-button
+            icon="pi pi-trash"
+            [outlined]="true"
+            pTooltip="Delete"
+            (click)="
+              removePhonemeTransformation(indexGroup, indexTransformation)
+            "
+          />
+        </div>
+        <p-button
+          icon="pi pi-plus"
+          pTooltip="Add new transformation function"
+          [outlined]="true"
+          (click)="addPhonemeTransformation(indexGroup)"
+        ></p-button>
+      </p-accordionTab>
+    </ng-container>
+  </p-accordion>
+
+  <p-button
+    icon="pi pi-plus"
+    pTooltip="Add new transformation group"
+    (click)="addTransformationGroup()"
+  ></p-button>
+</p-sidebar>

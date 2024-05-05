@@ -1,22 +1,29 @@
-<main class="container">
-  <section>
-    <app-phoneme-table />
-    <app-phoneme-free-input />
-    <p-button
-      icon="pi pi-language"
-      [outlined]="true"
-      size="small"
-      severity="secondary"
-      aria-label="openPhonemeTable"
-      (onClick)="openPhonemeTable()"
-    ></p-button>
-    <p-button
-      label="Start"
-      size="small"
-      (onClick)="onGenerationStart()"
-    ></p-button>
+<main class="dashboard-container">
+  <section class="input-container">
+    <section>
+      <app-phoneme-table />
+      <app-phoneme-free-input />
+      <p-button
+        icon="pi pi-language"
+        [outlined]="true"
+        size="small"
+        severity="secondary"
+        aria-label="openPhonemeTable"
+        (onClick)="openPhonemeTable()"
+      ></p-button>
+      <p-button
+        label="Start"
+        size="small"
+        (onClick)="onGenerationStart()"
+      ></p-button>
+    </section>
+    <section>
+      <h1>Phoneme Transformations</h1>
+      <app-transformation-group-manager />
+      <app-transformation-pipeline />
+    </section>
   </section>
-  <section>
+  <section class="output-container">
     <p>Output:</p>
     <p-chip
       *ngFor="let specimen of generationResult"

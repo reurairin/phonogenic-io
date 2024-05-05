@@ -1,0 +1,8 @@
+.phoneme-transformation-wrapper {
+  border: solid 1px var(--surface-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
