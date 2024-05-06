@@ -1,6 +1,11 @@
 <div class="phoneme-transformation-container" [formGroup]="form">
   <span class="p-float-label --inline-block">
-    <input pInputText id="initialPhoneme" formControlName="initialPhoneme" />
+    <input
+      pInputText
+      id="initialPhoneme"
+      formControlName="initialPhoneme"
+      class="--input-width"
+    />
     <label for="initialPhoneme">Initial Phoneme</label>
   </span>
   =>
@@ -15,6 +20,7 @@
         placeholder="Position"
         tooltip="Position of phoneme in the word"
         tooltipPosition="bottom"
+        class="--input-width"
       ></p-dropdown>
       <label for="username">Position</label>
     </span>
@@ -48,7 +54,7 @@
     </span>
     <span
       class="p-float-label --inline-block"
-      *ngIf="isLeftNeighborVisible$ | async"
+      *ngIf="isLeftNeighborVisible"
     >
       <p-chips formControlName="leftNeighborList" separator="," />
       <label for="leftNeighborList">Left Neighbor List</label>
@@ -70,9 +76,13 @@
     </span>
     <span
       class="p-float-label --inline-block"
-      *ngIf="isRightNeighborVisible$ | async"
+      *ngIf="isRightNeighborVisible"
     >
-      <p-chips formControlName="rightNeighborList" separator="," />
+      <p-chips
+        formControlName="rightNeighborList"
+        separator=","
+        class="--input-width"
+      />
       <label for="rightNeighborList">Right Neighbor List</label>
     </span>
     +
@@ -104,8 +114,9 @@
       pInputText
       id="transformationLikelihood"
       formControlName="transformationLikelihood"
+      class="--input-width"
     />
-    <label for="transformationLikelihood">Transformation Likelihood</label>
+    <label for="transformationLikelihood">Transformation Chance</label>
   </span>
   =>
   <span class="p-float-label --inline-block">
@@ -113,6 +124,7 @@
       pInputText
       id="resultingPhoneme"
       formControlName="resultingPhoneme"
+      class="--input-width"
     />
     <label for="resultingPhoneme">Resulting Phoneme</label>
   </span>

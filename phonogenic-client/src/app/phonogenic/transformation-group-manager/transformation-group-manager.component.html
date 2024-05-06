@@ -23,14 +23,6 @@
     ></p-button>
     <input #fileInput type="file" (change)="onFileUploaded($event)" hidden accept=".json">
   </ng-template>
-  <ul>
-    <li><s>add function</s></li>
-    <li><s>remove function</s></li>
-    <li>edit function</li>
-    <li>save all functions</li>
-    <li>load functions</li>
-    <li>load initial state from JSON</li>
-  </ul>
   <p-accordion [multiple]="true" [formGroup]="form">
     <ng-container formArrayName="transformationGroups">
       <p-accordionTab

@@ -1,6 +1,7 @@
 import { Injectable, WritableSignal, signal } from '@angular/core';
 import { TransformationGroup } from '../../models/transformation-group.type';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, tap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,12 @@ export class TransformationService {
   public transformationGroupsUpload$ =
     this.transformationGroupsUpload.asObservable();
 
-  constructor() {}
+  constructor(private http: HttpClient) {
+    this.http
+      .get('/assets/config/transformation-groups.json')
+      .pipe(tap((val: any) => this.transformationGroupsUpload.next(val)))
+      .subscribe((res) => console.log('read', res));
+  }
 
   public generateInitialGeneration(phonemes: string, populationSize: number) {
     const result: string[] = [];

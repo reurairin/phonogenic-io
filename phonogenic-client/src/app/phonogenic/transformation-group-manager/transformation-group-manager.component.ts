@@ -63,7 +63,7 @@ export class TransformationGroupManagerComponent implements OnInit {
                 transformationGroup.transformations.map((tr) =>
                   this.fb.control({
                     ...tr,
-                    conditions: this.fb.group(tr.conditions),
+                    conditions: {...tr.conditions},
                   })
                 )
               ),

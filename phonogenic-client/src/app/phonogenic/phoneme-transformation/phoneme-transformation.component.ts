@@ -1,5 +1,5 @@
 import { ButtonModule } from 'primeng/button';
-import { Component, OnInit, forwardRef, signal } from '@angular/core';
+import { Component, OnInit, forwardRef } from '@angular/core';
 import { DropdownModule } from 'primeng/dropdown';
 import {
   FormBuilder,
@@ -10,7 +10,6 @@ import {
 import { InputTextModule } from 'primeng/inputtext';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { debounceTime, map } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { ChipsModule } from 'primeng/chips';
 import { PhonemeTransformationConditions } from '../../models/phoneme-transformation-conditions.type';
@@ -46,12 +45,32 @@ export class PhonemeTransformationComponent
 {
   constructor(private fb: FormBuilder) {}
 
+  isLeftNeighborVisible = false;
+  isRightNeighborVisible = false;
+
   ngOnInit(): void {
-    this.form.valueChanges
-      .pipe(debounceTime(500), untilDestroyed(this))
-      .subscribe((val) => {
-        this.onChange(val);
-      });
+    this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((val) => {
+      this.onChange(val);
+
+      const leftNeighborType = val.conditions?.leftNeighborType;
+      if (
+        leftNeighborType === PhonemeNeighbor.IN_LIST ||
+        leftNeighborType === PhonemeNeighbor.NOT_IN_LIST
+      ) {
+        this.isLeftNeighborVisible = true;
+      } else {
+        this.isLeftNeighborVisible = false;
+      }
+      const rightNeighborType = val.conditions?.rightNeighborType;
+      if (
+        rightNeighborType === PhonemeNeighbor.IN_LIST ||
+        rightNeighborType === PhonemeNeighbor.NOT_IN_LIST
+      ) {
+        this.isRightNeighborVisible = true;
+      } else {
+        this.isRightNeighborVisible = false;
+      }
+    });
   }
 
   form = this.fb.group({
@@ -74,24 +93,6 @@ export class PhonemeTransformationComponent
     return this.form.get('conditions') as FormGroup;
   }
 
-  isLeftNeighborVisible$ = this.form
-    .get('conditions')
-    ?.get('leftNeighborType')
-    ?.valueChanges.pipe(
-      map(
-        (val) =>
-          !!(
-            val === PhonemeNeighbor.IN_LIST ||
-            val === PhonemeNeighbor.NOT_IN_LIST
-          )
-      )
-    );
-
-  isRightNeighborVisible$ = this.form
-    .get('conditions')
-    ?.get('rightNeighborType')
-    ?.valueChanges.pipe(map((val) => !!val));
-
   /*
   -------------
   ControlValueAccessor methods
@@ -107,10 +108,7 @@ export class PhonemeTransformationComponent
       initialPhoneme: obj.initialPhoneme,
       resultingPhoneme: obj.resultingPhoneme,
       transformationLikelihood: obj.transformationLikelihood,
-      conditions: {
-        position: obj?.conditions?.position,
-        stressing: obj?.conditions?.stressing,
-      },
+      conditions: { ...obj.conditions },
     });
   }
 
@@ -171,11 +169,11 @@ export class PhonemeTransformationComponent
       value: PhonemeNeighbor.CONSONANT,
     },
     {
-      label: 'In character list',
+      label: 'In list',
       value: PhonemeNeighbor.IN_LIST,
     },
     {
-      label: 'Not in character list',
+      label: 'Not in list',
       value: PhonemeNeighbor.NOT_IN_LIST,
     },
   ];

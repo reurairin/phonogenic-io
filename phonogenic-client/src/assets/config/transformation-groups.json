@@ -1,0 +1,158 @@
+[
+  {
+    "name": "Late Proto-Germanic period",
+    "transformations": [
+      {
+        "initialPhoneme": "a",
+        "resultingPhoneme": "",
+        "transformationLikelihood": 20,
+        "conditions": {
+          "position": "ENDING",
+          "stressing": "STRESSED",
+          "leftNeighborType": null,
+          "leftNeighborList": null,
+          "rightNeighborType": null,
+          "rightNeighborList": null,
+          "prevSyllable": null,
+          "nextSyllable": null
+        }
+      },
+      {
+        "initialPhoneme": "e",
+        "resultingPhoneme": "",
+        "transformationLikelihood": 20,
+        "conditions": {
+          "position": "ENDING",
+          "stressing": "STRESSED",
+          "leftNeighborType": null,
+          "leftNeighborList": null,
+          "rightNeighborType": null,
+          "rightNeighborList": null,
+          "prevSyllable": null,
+          "nextSyllable": null
+        }
+      },
+      {
+        "initialPhoneme": "o",
+        "resultingPhoneme": "",
+        "transformationLikelihood": 20,
+        "conditions": {
+          "position": "ENDING",
+          "stressing": "STRESSED",
+          "leftNeighborType": null,
+          "leftNeighborList": null,
+          "rightNeighborType": null,
+          "rightNeighborList": null,
+          "prevSyllable": null,
+          "nextSyllable": null
+        }
+      },
+      {
+        "initialPhoneme": "m",
+        "resultingPhoneme": "n",
+        "transformationLikelihood": 20,
+        "conditions": {
+          "position": "ENDING",
+          "stressing": null,
+          "leftNeighborType": null,
+          "leftNeighborList": null,
+          "rightNeighborType": null,
+          "rightNeighborList": null,
+          "prevSyllable": null,
+          "nextSyllable": null
+        }
+      },
+      {
+        "initialPhoneme": "t",
+        "resultingPhoneme": "",
+        "transformationLikelihood": 20,
+        "conditions": {
+          "position": null,
+          "stressing": null,
+          "leftNeighborType": null,
+          "leftNeighborList": null,
+          "rightNeighborType": null,
+          "rightNeighborList": null,
+          "prevSyllable": null,
+          "nextSyllable": null
+        }
+      },
+      {
+        "initialPhoneme": "e",
+        "resultingPhoneme": "i",
+        "transformationLikelihood": 20,
+        "conditions": {
+          "position": null,
+          "stressing": "UNSTRESSED",
+          "leftNeighborType": null,
+          "leftNeighborList": null,
+          "rightNeighborType": "NOT_IN_LIST",
+          "rightNeighborList": ["r"],
+          "prevSyllable": null,
+          "nextSyllable": null
+        }
+      },
+      {
+        "initialPhoneme": "e",
+        "resultingPhoneme": "ɑ",
+        "transformationLikelihood": 20,
+        "conditions": {
+          "position": null,
+          "stressing": "UNSTRESSED",
+          "leftNeighborType": null,
+          "leftNeighborList": null,
+          "rightNeighborType": "IN_LIST",
+          "rightNeighborList": ["r"],
+          "prevSyllable": null,
+          "nextSyllable": null
+        }
+      },
+      {
+        "initialPhoneme": "e",
+        "resultingPhoneme": "i",
+        "transformationLikelihood": 20,
+        "conditions": {
+          "position": null,
+          "stressing": null,
+          "leftNeighborType": null,
+          "leftNeighborList": null,
+          "rightNeighborType": "IN_LIST",
+          "rightNeighborList": ["z"],
+          "prevSyllable": null,
+          "nextSyllable": null
+        }
+      },
+      {
+        "initialPhoneme": "e",
+        "resultingPhoneme": "i",
+        "transformationLikelihood": 20,
+        "conditions": {
+          "position": null,
+          "stressing": null,
+          "leftNeighborType": null,
+          "leftNeighborList": null,
+          "rightNeighborType": "CONSONANT",
+          "rightNeighborList": null,
+          "prevSyllable": null,
+          "nextSyllable": null
+        }
+      },
+      {
+        "initialPhoneme": "n",
+        "resultingPhoneme": "",
+        "transformationLikelihood": 20,
+        "conditions": {
+          "position": null,
+          "stressing": null,
+          "leftNeighborType": null,
+          "leftNeighborList": null,
+          "rightNeighborType": "IN_LIST",
+          "rightNeighborList": ["x"],
+          "prevSyllable": null,
+          "nextSyllable": null
+        }
+      }
+    ]
+  },
+  { "name": "Test B", "transformations": [] }
+]

@@ -2,7 +2,7 @@ import { PhonemeTransformationConditions } from './phoneme-transformation-condit
 
 export type PhonemeTransformation = {
   initialPhoneme: string;
-  targetPhoneme: string;
+  resultingPhoneme: string;
   transformationLikelihood: number;
   conditions: PhonemeTransformationConditions;
 };
