@@ -14,7 +14,8 @@ import { PhonemeTransformationComponent } from '../phoneme-transformation/phonem
 import { InputTextModule } from 'primeng/inputtext';
 import { PhonemeTransformationConditions } from '../../models/phoneme-transformation-conditions.type';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { debounceTime } from 'rxjs';
+import { debounceTime, map, tap } from 'rxjs';
+import { TransformationService } from '../services/transformation.service';
 
 @UntilDestroy()
 @Component({
@@ -35,15 +36,49 @@ import { debounceTime } from 'rxjs';
 })
 export class TransformationGroupManagerComponent implements OnInit {
   form = this.fb.group({
-    transformationGroups: this.fb.array<FormGroup>([]),
+    transformationGroups: this.fb.array([]),
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private transformationService: TransformationService
+  ) {}
 
   ngOnInit() {
     this.form.valueChanges
       .pipe(debounceTime(500), untilDestroyed(this))
-      .subscribe((val) => console.log(val));
+      .subscribe((val) => {
+        this.transformationService.updateTransformationGroups(
+          val.transformationGroups as any[]
+        );
+      });
+
+    this.transformationService.transformationGroupsUpload$
+      .pipe(
+        map((val) =>
+          val.map((transformationGroup) =>
+            this.fb.group({
+              name: transformationGroup.name,
+              transformations: this.fb.array(
+                transformationGroup.transformations.map((tr) =>
+                  this.fb.control({
+                    ...tr,
+                    conditions: this.fb.group(tr.conditions),
+                  })
+                )
+              ),
+            })
+          )
+        ),
+        tap((val) => {
+          while (this.transformationGroups.length !== 0) {
+            this.transformationGroups.removeAt(0);
+          }
+          val?.forEach((el) => this.transformationGroups.push(el));
+        }),
+        untilDestroyed(this)
+      )
+      .subscribe();
   }
 
   /*
@@ -64,9 +99,17 @@ export class TransformationGroupManagerComponent implements OnInit {
   */
   saveConfig() {
     console.log(this.form.controls.transformationGroups.value);
+    const data = this.form.controls.transformationGroups.value;
+
+    this.transformationService.saveTransformationGroupsToJSON(data);
   }
 
-  loadConfig() {}
+  onFileUploaded(event: any) {
+    const file = event?.target?.files[0];
+    if (file) {
+      this.transformationService.loadTransformationGroupFromJSON(file);
+    }
+  }
 
   /*
   -------------------------

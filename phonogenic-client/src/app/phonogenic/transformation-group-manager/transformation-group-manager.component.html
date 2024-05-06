@@ -19,8 +19,9 @@
       [outlined]="true"
       size="small"
       aria-label="openPhonemeTable"
-      (onClick)="loadConfig()"
+      (onClick)="fileInput.click()"
     ></p-button>
+    <input #fileInput type="file" (change)="onFileUploaded($event)" hidden accept=".json">
   </ng-template>
   <ul>
     <li><s>add function</s></li>
