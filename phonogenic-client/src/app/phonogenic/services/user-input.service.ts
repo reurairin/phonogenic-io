@@ -7,6 +7,15 @@ export class UserInputService {
   private currentPhonemes: WritableSignal<string>;
   public isPhonemeTableOpen: WritableSignal<boolean>;
 
+  public epochNumber = signal(10);
+  public populationSize = signal(10);
+  public overrideTransformationChance: WritableSignal<number | null> = signal(null);
+
+  public easeOfPronunciationParams = signal({
+    wordLength: 1,
+
+  })
+
   constructor() {
     this.currentPhonemes = signal('');
     this.isPhonemeTableOpen = signal(false);

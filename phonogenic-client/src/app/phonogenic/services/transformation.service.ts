@@ -2,6 +2,8 @@ import { Injectable, WritableSignal, signal } from '@angular/core';
 import { TransformationGroup } from '../../models/transformation-group.type';
 import { BehaviorSubject, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { UserInputService } from './user-input.service';
+import { AlgorithmEpoch } from '../../models/algorithm-epoch.type';
 
 @Injectable({
   providedIn: 'root',
@@ -10,59 +12,23 @@ export class TransformationService {
   private transformationGroups = new BehaviorSubject<TransformationGroup[]>([]);
   public transformationGroups$ = this.transformationGroups.asObservable();
 
-  private transformationGroupsUpload = new BehaviorSubject<
-    TransformationGroup[]
-  >([]);
-  public transformationGroupsUpload$ =
-    this.transformationGroupsUpload.asObservable();
-
-  constructor(private http: HttpClient) {
-    this.http
-      .get('/assets/config/transformation-groups.json')
-      .pipe(tap((val: any) => this.transformationGroupsUpload.next(val)))
-      .subscribe((res) => console.log('read', res));
-  }
+  constructor(private userInputService: UserInputService) {}
 
   public generateInitialGeneration(phonemes: string, populationSize: number) {
-    const result: string[] = [];
+    const result: AlgorithmEpoch[] = [];
 
-    console.log('generateInitialGeneration', result, populationSize);
-    for (let i = 0; i < populationSize; i++) {
-      console.log('phonemes', phonemes);
-      result.push(phonemes);
-    }
-
-    return result;
-  }
-
-  public saveTransformationGroupsToJSON(data: any[]) {
-    const jsonString = JSON.stringify(data);
-
-    const blob = new Blob([jsonString], { type: 'application/json' });
-
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'transformation-groups.json';
-
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-
-    URL.revokeObjectURL(a.href);
-  }
-
-  public loadTransformationGroupFromJSON(file: any) {
-    const fileReader = new FileReader();
-    fileReader.onload = (e) => {
-      const contents = fileReader.result as string;
-      try {
-        const json = JSON.parse(contents);
-        this.transformationGroupsUpload.next(json as TransformationGroup[]);
-      } catch (e) {
-        console.error('Error parsing JSON!', e);
+    console.log();
+    console.log('generateInitialGeneration', phonemes, this.userInputService.populationSize());
+    for (let i = 0; i < this.userInputService.epochNumber(); i++) {
+      const epoch: AlgorithmEpoch = { index: i, words: [] };
+      for (let j = 0; j < this.userInputService.populationSize(); j++) {
+        console.log('phonemes', phonemes);
+        epoch.words.push(phonemes);
       }
-    };
-    fileReader.readAsText(file);
+      result.push(epoch);
+    }
+    console.log('generateInitialGeneration result', result);
+    return result;
   }
 
   public updateTransformationGroups(data: any[]) {

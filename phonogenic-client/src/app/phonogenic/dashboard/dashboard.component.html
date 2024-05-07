@@ -1,34 +1,33 @@
 <main class="dashboard-container">
   <section class="input-container">
-    <section>
+    <p-card header="Input Parameters">
       <app-phoneme-table />
-      <app-phoneme-free-input />
-      <p-button
-        icon="pi pi-language"
-        [outlined]="true"
-        size="small"
-        severity="secondary"
-        aria-label="openPhonemeTable"
-        (onClick)="openPhonemeTable()"
-      ></p-button>
+      <app-algorithm-params />
       <p-button
         label="Start"
         size="small"
         (onClick)="onGenerationStart()"
       ></p-button>
-    </section>
-    <section>
-      <h1>Phoneme Transformations</h1>
+    </p-card>
+
+    <p-card header="Phoneme Transformations">
       <app-transformation-group-manager />
       <app-transformation-pipeline />
-    </section>
+    </p-card>
+    <p-card header="Fitness Function Parameters">
+      <app-fitness-function-manager />
+    </p-card>
   </section>
+
   <section class="output-container">
     <p>Output:</p>
-    <p-chip
-      *ngFor="let specimen of generationResult"
-      [label]="specimen"
-      class="result-chip"
-    ></p-chip>
+    <div *ngFor="let epoch of generationResult">
+      <h4>Epoch {{ epoch.index }}</h4>
+      <p-chip
+        *ngFor="let word of epoch.words"
+        [label]="word"
+        class="result-chip"
+      ></p-chip>
+    </div>
   </section>
 </main>

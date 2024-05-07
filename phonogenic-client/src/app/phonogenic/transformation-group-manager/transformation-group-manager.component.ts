@@ -16,6 +16,7 @@ import { PhonemeTransformationConditions } from '../../models/phoneme-transforma
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { debounceTime, map, tap } from 'rxjs';
 import { TransformationService } from '../services/transformation.service';
+import { ConfigService } from '../services/config.service';
 
 @UntilDestroy()
 @Component({
@@ -41,7 +42,8 @@ export class TransformationGroupManagerComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private transformationService: TransformationService
+    private transformationService: TransformationService,
+    private configService: ConfigService
   ) {}
 
   ngOnInit() {
@@ -53,7 +55,7 @@ export class TransformationGroupManagerComponent implements OnInit {
         );
       });
 
-    this.transformationService.transformationGroupsUpload$
+    this.configService.transformationGroupsUpload$
       .pipe(
         map((val) =>
           val.map((transformationGroup) =>
@@ -63,7 +65,7 @@ export class TransformationGroupManagerComponent implements OnInit {
                 transformationGroup.transformations.map((tr) =>
                   this.fb.control({
                     ...tr,
-                    conditions: {...tr.conditions},
+                    conditions: { ...tr.conditions },
                   })
                 )
               ),
@@ -101,13 +103,13 @@ export class TransformationGroupManagerComponent implements OnInit {
     console.log(this.form.controls.transformationGroups.value);
     const data = this.form.controls.transformationGroups.value;
 
-    this.transformationService.saveTransformationGroupsToJSON(data);
+    this.configService.saveTransformationGroupsToJSON(data);
   }
 
   onFileUploaded(event: any) {
     const file = event?.target?.files[0];
     if (file) {
-      this.transformationService.loadTransformationGroupFromJSON(file);
+      this.configService.loadTransformationGroupFromJSON(file);
     }
   }
 

@@ -5,3 +5,8 @@
 .header {
   font-size: 1.1rem;
 }
+
+.input-wrapper{
+  display: flex;
+  margin-bottom: 1.5rem;
+}

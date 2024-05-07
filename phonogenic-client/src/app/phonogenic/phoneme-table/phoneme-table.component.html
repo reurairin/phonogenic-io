@@ -1,9 +1,29 @@
+<span class="input-wrapper">
+  <span class="p-float-label">
+    <input pInputText id="phonemes" [(ngModel)]="phonemes" />
+    <label for="phonemes">Initial Word</label>
+  </span>
+  <p-button
+    icon="pi pi-language"
+    [outlined]="true"
+    size="small"
+    severity="secondary"
+    aria-label="openPhonemeTable"
+    (onClick)="openPhonemeTable()"
+  ></p-button>
+</span>
+
 <p-sidebar
   [(visible)]="isPhonemeTableOpen"
   position="bottom"
   [style]="{ height: ' 95%' }"
 >
-  <ng-template pTemplate="header"><app-phoneme-free-input /></ng-template>
+  <ng-template pTemplate="header">
+    <span class="p-float-label">
+      <input pInputText id="phonemes" [(ngModel)]="phonemes" />
+      <label for="phonemes">Initial Word</label>
+    </span></ng-template
+  >
 
   <h1 class="header">Consonants</h1>
   <table>

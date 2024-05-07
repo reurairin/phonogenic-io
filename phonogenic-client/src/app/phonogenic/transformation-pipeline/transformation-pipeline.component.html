@@ -1,9 +1,15 @@
 <h4>Transformation Pipeline</h4>
-<div *ngFor="let transformation of transformationFunctions; index as index">
-  {{ transformation.name }}
+<ol>
+  <li *ngFor="let transformation of selectedTransformations; index as index">
+    {{ transformation.name }}
+  </li>
+</ol>
+
+<div [formGroup]="form">
+  <p-dropdown
+    [options]="transformationFunctions"
+    optionLabel="name"
+    placeholder="Add a transformation"
+    formControlName="selector"
+  />
 </div>
-<p-button
-  icon="pi pi-plus"
-  pTooltip="Add new transformation function"
-  (click)="addTransformationFunction()"
-></p-button>

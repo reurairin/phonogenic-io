@@ -9,8 +9,13 @@ import { UserInputService } from '../services/user-input.service';
 import { PhonemeFreeInputComponent } from '../phoneme-free-input/phoneme-free-input.component';
 import { TransformationPipelineComponent } from '../transformation-pipeline/transformation-pipeline.component';
 import { TransformationGroupManagerComponent } from '../transformation-group-manager/transformation-group-manager.component';
+import { CardModule } from 'primeng/card';
+import { FitnessFunctionManagerComponent } from '../fitness-function-manager/fitness-function-manager.component';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { AlgorithmParamsComponent } from '../algorithm-params/algorithm-params.component';
+import { AlgorithmEpoch } from '../../models/algorithm-epoch.type';
 
-const primengComponents = [ButtonModule, ChipModule];
+const primengComponents = [ButtonModule, CardModule, ChipModule, InputNumberModule];
 
 @Component({
   selector: 'app-dashboard',
@@ -20,8 +25,9 @@ const primengComponents = [ButtonModule, ChipModule];
   imports: [
     ...primengComponents,
     PhonemeFreeInputComponent,
-    FormsModule,
+    AlgorithmParamsComponent,
     CommonModule,
+    FitnessFunctionManagerComponent,
     PhonemeTableComponent,
     TransformationPipelineComponent,
     TransformationGroupManagerComponent,
@@ -40,7 +46,7 @@ export class DashboardComponent {
   }
 
   public phonemes = this.userInputService.getCurrentPhonemes();
-  public generationResult: string[] = [];
+  public generationResult: AlgorithmEpoch[] = [];
   public openPhonemeTable() {
     this.userInputService.openPhonemeTable();
   }
